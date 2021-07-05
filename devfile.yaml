@@ -1,6 +1,6 @@
 apiVersion: 1.0.0
 metadata:
-  name: dotnet4252main
+  name: PFR_POC_Workspace
 projects:
   - name: dotnet-app
     source:
@@ -24,7 +24,7 @@ components:
       - name: nuget
         containerPath: /home/jboss/.nuget
     image: 'registry.redhat.io/codeready-workspaces/stacks-dotnet-rhel8:2.8'
-    alias: PFR-UI
+    alias: pfr-ui
   - mountSources: true
     memoryLimit: 512Mi
     type: dockerimage
@@ -32,7 +32,7 @@ components:
       - name: nuget
         containerPath: /home/jboss/.nuget
     image: 'registry.redhat.io/codeready-workspaces/stacks-dotnet-rhel8:2.8'
-    alias: PFR-BRE
+    alias: pfr-bre
   - referenceContent: |-
       ---
       apiVersion: v1
@@ -204,34 +204,34 @@ commands:
       - workdir: '${CHE_PROJECTS_ROOT}/dotnet-app/PoliticalFinanceReturn/PFR.Web.UI'
         type: exec
         command: dotnet restore
-        component: PFR-UI
+        component: pfr-ui
   - name: 2. Build UI
     actions:
       - workdir: '${CHE_PROJECTS_ROOT}/dotnet-app/PoliticalFinanceReturn/PFR.Web.UI'
         type: exec
         command: dotnet build
-        component: PFR-UI
+        component: pfr-ui
   - name: 3. Run UI
     actions:
       - workdir: '${CHE_PROJECTS_ROOT}/dotnet-app/PoliticalFinanceReturn/PFR.Web.UI'
         type: exec
         command: dotnet run
-        component: PFR-UI
+        component: pfr-ui
   - name: 1. Update BRE dependencies
     actions:
       - workdir: '${CHE_PROJECTS_ROOT}/dotnet-app/PFR.Validation/bre/PFR.BRE/PFR.BRE'
         type: exec
         command: dotnet restore
-        component: PFR-BRE
+        component: pfr-bre
   - name: 2. Build BRE
     actions:
       - workdir: '${CHE_PROJECTS_ROOT}/dotnet-app/PFR.Validation/bre/PFR.BRE/PFR.BRE'
         type: exec
         command: dotnet build
-        component: PFR-BRE
+        component: pfr-bre
   - name: 3. Run BRE
     actions:
       - workdir: '${CHE_PROJECTS_ROOT}/dotnet-app/PFR.Validation/bre/PFR.BRE/PFR.BRE'
         type: exec
         command: dotnet run
-        component: PFR-BRE
+        component: pfr-bre
