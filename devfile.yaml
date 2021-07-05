@@ -23,6 +23,9 @@ components:
     volumes:
       - name: nuget
         containerPath: /home/jboss/.nuget
+    env:
+      - value: Codeready
+        name: ASPNETCORE_ENVIRONMENT
     image: 'registry.redhat.io/codeready-workspaces/stacks-dotnet-rhel8:2.8'
     alias: pfr-ui
   - mountSources: true
@@ -31,6 +34,9 @@ components:
     volumes:
       - name: nuget
         containerPath: /home/jboss/.nuget
+    env:
+      - value: Codeready
+        name: ASPNETCORE_ENVIRONMENT
     image: 'registry.redhat.io/codeready-workspaces/stacks-dotnet-rhel8:2.8'
     alias: pfr-bre
   - referenceContent: |-
